@@ -1,0 +1,54 @@
+/* 
+  Localizable.strings
+  Authentication
+
+  Created by Лидия Некрасова on 30.04.2024.
+  
+*/
+
+//Login
+loginTitle = "Login to your personal account";
+loginText = "Please login to continue";
+
+enterEmailTitle = "Enter your E-mail";
+enterPasswordTitle = "Enter your password";
+
+signUp = "Sign up";
+forgotPassword = "Forgot your password?";
+
+loginButtonTitle = "Login";
+googleButtonTitle = "Sign in with Google";
+
+or = "Or";
+
+//Registration
+
+registrationTitle = "Registration";
+repeatPasswordTitle = "Confirm password";
+registrationButtonTitle = "Register";
+hasRegistrationButtonTitle = "I already have an account";
+
+//ResetPassword
+
+resetPassword = "Password recovery";
+resetPasswordButtonTitle = "Reset password";
+
+//ImageEditor
+
+chooseYourPicture = "Choose your picture";
+typeHere = "Type here";
+selectPhoto = "Select an image";
+photoLibrary = "Gallery";
+camera = "Сamera";
+
+//Alert
+
+alertTitle = "Error";
+alertSuccessTitle = "Done";
+alertSuccessRegistrationTitle = "Registration completed successfully";
+alertSuccessResetPasswordTitle = "Password reset successful";
+alertButtonTitle = "Ok";
+alertEmailNotConfirmed = "Email not verified";
+alertSendEmailConfirmed = "A confirmation message has been sent to your email";
+alertSendPasswordReset = "A message has been sent to your email to set a new password";
+alertSuccessSaveImage = "Image saved successfully";
