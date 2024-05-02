@@ -18,17 +18,19 @@ struct FilteringView: View {
             VStack {
                 Spacer()
                 
-                
+                //Изображение
                 Image(uiImage: viewModel.mainViewImage.image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: UIScreen.main.bounds.width)
                 
+                //Слайдер для корректировки интенсивности фильтра
                 Slider(value: $viewModel.sliderValue)
                     .padding()
                     .opacity(viewModel.mainViewImage.isEditable ? 1 : 0)
                     .disabled(viewModel.mainViewImage.isEditable ? false : true)
                 
+                //Превью изображением с фильтрами
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
                         ForEach(viewModel.allImages) { filtered in
@@ -50,6 +52,8 @@ struct FilteringView: View {
             })
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    
+                    //Готово
                     Button {
                         viewModel.doneFilteringImage()
                     } label: {
@@ -57,6 +61,8 @@ struct FilteringView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
+                    
+                    //Отмена
                     Button {
                         viewModel.cancelFilteringImage()
                     } label: {
@@ -74,4 +80,3 @@ struct FilteringView_Previews: PreviewProvider {
         LoadingView()
     }
 }
-

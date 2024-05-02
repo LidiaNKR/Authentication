@@ -11,10 +11,14 @@ import GoogleSignIn
 @MainActor
 final class AuthenticationViewModel: ObservableObject {
     
+    // MARK: - SignInState
+    
     enum SignInState {
         case signedIn
         case signedOut
     }
+    
+    // MARK: - Properties
     
     @Published var state: SignInState = .signedOut
     @Published var showLoadingView: Bool = false
@@ -25,6 +29,8 @@ final class AuthenticationViewModel: ObservableObject {
     private var authUser : User? {
         return Auth.auth().currentUser
     }
+    
+    // MARK: - Initializers
     
     init() {
         state = (authUser != nil && authUser?.isEmailVerified  ?? false) ? .signedIn : .signedOut
@@ -47,9 +53,9 @@ final class AuthenticationViewModel: ObservableObject {
             
             if !result.user.isEmailVerified {
                 ///Выводим ошибку о том, что email не подтвержден
-                showAlert(messageTitle: "") //alertEmailNotConfirmed
+                showAlert(messageTitle: L10n.alertEmailNotConfirmed)
             } else {
-                
+                ///Осуществляем вход в учетную запись
                 showLoadingView.toggle()
                 state = .signedIn
             }
@@ -70,8 +76,10 @@ final class AuthenticationViewModel: ObservableObject {
         do {
             try await Auth.auth().createUser(withEmail: email, password: password)
             
+            ///Отправляем подтверждение на эл. почту
             sendVerificatiOnMail()
             
+            ///Выводим алерт об успешной регистрации
             showAlert(
                 messageTitle: L10n.alertSendEmailConfirmed,
                 isDismiss: true)
@@ -88,6 +96,7 @@ final class AuthenticationViewModel: ObservableObject {
         do {
             try await Auth.auth().sendPasswordReset(withEmail: email)
             
+            ///Выводим алерт об успешноом сбросе пароля
             showAlert(
                 messageTitle: L10n.alertSendPasswordReset,
                 isDismiss: true)

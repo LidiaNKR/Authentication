@@ -10,11 +10,18 @@ import Firebase
 
 @main
 struct AuthenticationApp: App {
+    
+    // MARK: - Properties
+    
     @StateObject var viewModel = AuthenticationViewModel()
+    
+    // MARK: - Initializers
     
     init() {
       setupAuthentication()
     }
+    
+    // MARK: - Body
     
     var body: some Scene {
         WindowGroup {
@@ -24,8 +31,12 @@ struct AuthenticationApp: App {
     }
 }
 
+// MARK: - Extension
+
 extension AuthenticationApp {
+    
   private func setupAuthentication() {
     FirebaseApp.configure()
   }
+    
 }

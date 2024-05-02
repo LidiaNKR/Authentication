@@ -60,9 +60,9 @@ fileprivate struct ZoomableScrollView<Content: View>: UIViewRepresentable {
     // MARK: - Methods
     
     func makeUIView(context: Context) -> UIScrollView {
-        // Setup the UIScrollView
+        // Доабвление UIScrollView
         let scrollView = UIScrollView()
-        scrollView.delegate = context.coordinator // for viewForZooming(in:)
+        scrollView.delegate = context.coordinator // для viewForZooming(in:)
         scrollView.maximumZoomScale = maxAllowedScale
         scrollView.minimumZoomScale = 1
         scrollView.bouncesZoom = true
@@ -70,7 +70,7 @@ fileprivate struct ZoomableScrollView<Content: View>: UIViewRepresentable {
         scrollView.showsVerticalScrollIndicator = false
         scrollView.clipsToBounds = false
 
-        // Create a UIHostingController to hold our SwiftUI content
+        // Добавление UIHostingController для удержанеия содержимого
         let hostedView = context.coordinator.hostingController.view!
         hostedView.translatesAutoresizingMaskIntoConstraints = true
         hostedView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -85,15 +85,15 @@ fileprivate struct ZoomableScrollView<Content: View>: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UIScrollView, context: Context) {
-        // Update the hosting controller's SwiftUI content
+        // Обновление содержимого
         context.coordinator.hostingController.rootView = content
 
-        if uiView.zoomScale > uiView.minimumZoomScale { // Scale out
+        if uiView.zoomScale > uiView.minimumZoomScale { // Масштабирование
             uiView.setZoomScale(currentScale, animated: true)
         } else if tapLocation != .zero { // Scale in to a specific point
             uiView.zoom(to: zoomRect(for: uiView, scale: uiView.maximumZoomScale, center: tapLocation), animated: true)
-            // Reset the location to prevent scaling to it in case of a negative scale (manual pinch)
-            // Use the main thread to prevent unexpected behavior
+            // Сбрасываем местоположение, чтобы предотвратить масштабирование до него в случае отрицательного масштаба (сжатие вручную)
+            // Использование основного потока, чтобы предотвратить неожиданное поведение.
             DispatchQueue.main.async { tapLocation = .zero }
         }
 

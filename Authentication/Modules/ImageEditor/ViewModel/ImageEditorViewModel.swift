@@ -18,7 +18,7 @@ final class ImageEditorViewModel: ObservableObject {
     @Published var imageData: Data = Data(count: 0)
     @Published var rect: CGRect = .zero
     
-    //Инструменя для рисования
+    //Инструменты для рисования
     @Published var canvas = PKCanvasView()
     @Published var toolPicker = PKToolPicker()
     

@@ -32,34 +32,43 @@ struct LoginView: View {
                 VStack {
                     VStack(alignment: .center) {
                         
+                        //Заголовок
                         LoginHeader(title: L10n.loginTitle,
                                     text: L10n.loginText)
                             .padding(.bottom)
                         
+                        //Поле ввода эл. почты
                         EmailTextField(title: L10n.enterEmailTitle,
                                        text: $email)
                         
+                        //Поле ввода пароля
                         PasswordSecureField(title: L10n.enterPasswordTitle,
                                             text: $password,
                                             isValidPassword: .constant(false))
                         
                         HStack {
+                            //Зарегистрироваться
                             Button(L10n.signUp) {
                                 showRegistrationView.toggle()
                             }
                             Spacer()
+                            
+                            //Сбросить пароль
                             Button(L10n.forgotPassword) {
                                 showResetPasswordView.toggle()
                             }
                         }
-                        .padding(.horizontal, Constants.buttonsHorisontalPadding)
+                        .padding(.horizontal,
+                                 Constants.buttonsHorisontalPadding)
                         
+                        //Войти
                         MainButton(title: L10n.loginButtonTitle) {
                             
                             viewModel.showLoadingView.toggle()
                             
                             Task {
-                                try await viewModel.signIn(withEmail: email, password: password)
+                                try await viewModel.signIn(withEmail: email,
+                                                           password: password)
                             }
                         }
                         
@@ -73,13 +82,17 @@ struct LoginView: View {
                             }
                         }
                         
+                        //Вход через Google
                         GoogleButton(title: L10n.googleButtonTitle) {
                             viewModel.signInWithGoogle()
                         }
                     }
+                    //Алерт
                     .alert(isPresented: $viewModel.showAlert) {
-                        Alert(title: Text(L10n.alertTitle), message: Text(viewModel.message),
-                              dismissButton: .default(Text(L10n.alertButtonTitle)) {
+                        Alert(title: Text(L10n.alertTitle),
+                              message: Text(viewModel.message),
+                              dismissButton:
+                                .default(Text(L10n.alertButtonTitle)) {
                             viewModel.showLoadingView.toggle()
                         })
                     }

@@ -17,11 +17,11 @@ struct ImagePicker: UIViewControllerRepresentable {
     @Binding var originImageData: Data
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
     
+    // MARK: - Methods
+    
     func makeCoordinator() -> Coordinator {
         return ImagePicker.Coordinator(imagePicker: self)
     }
-    
-    // MARK: - Methods
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
         
