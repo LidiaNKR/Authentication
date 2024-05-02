@@ -16,7 +16,7 @@
 
 <p align="center" width="100%">
     <img width="30%" src="https://github.com/LidiaNKR/ImageEditor/blob/20b41ff3c70c9dc6b1c983b52d806a5b4155473a/Images/registration.PNG">
-    <img width="30%" src="https://github.com/LidiaNKR/ImageEditor/blob/20b41ff3c70c9dc6b1c983b52d806a5b4155473a/Images/registration.PNG">
+    <img width="30%" src="https://github.com/LidiaNKR/ImageEditor/blob/fd5d274e1ae3729ffcb88a67c548d2fd5550bff4/Images/resetPassword.PNG">
 </p>
 
 3. Экран выбора изображения для редактирование и непосредственно редактирование изображения с помощь:
@@ -26,10 +26,10 @@
 Также реализована возможность сохранения и отправки изображения через соц. сети и пр.
 
 <p align="center" width="100%">
-    <img width="30%" src="https://github.com/LidiaNKR/ImageEditor/blob/20b41ff3c70c9dc6b1c983b52d806a5b4155473a/Images/chooseImage.PNG">
-    <img width="30%" src="https://github.com/LidiaNKR/ImageEditor/blob/20b41ff3c70c9dc6b1c983b52d806a5b4155473a/Images/editor.PNG">
-    <img width="30%" src="https://github.com/LidiaNKR/ImageEditor/blob/20b41ff3c70c9dc6b1c983b52d806a5b4155473a/Images/addText.PNG">
-    <img width="30%" src="https://github.com/LidiaNKR/ImageEditor/blob/20b41ff3c70c9dc6b1c983b52d806a5b4155473a/Images/filter.PNG">
+    <img width="25%" src="https://github.com/LidiaNKR/ImageEditor/blob/20b41ff3c70c9dc6b1c983b52d806a5b4155473a/Images/chooseImage.PNG">
+    <img width="25%" src="https://github.com/LidiaNKR/ImageEditor/blob/20b41ff3c70c9dc6b1c983b52d806a5b4155473a/Images/editor.PNG">
+    <img width="25%" src="https://github.com/LidiaNKR/ImageEditor/blob/20b41ff3c70c9dc6b1c983b52d806a5b4155473a/Images/addText.PNG">
+    <img width="25%" src="https://github.com/LidiaNKR/ImageEditor/blob/20b41ff3c70c9dc6b1c983b52d806a5b4155473a/Images/filter.PNG">
 </p>
 
 # Используемый стек технологий
