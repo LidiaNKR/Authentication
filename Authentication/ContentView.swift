@@ -9,12 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     
+    // MARK: - Properties
+    
     @EnvironmentObject var viewModel: AuthenticationViewModel
+    
+    // MARK: - Body
     
     var body: some View {
         switch viewModel.state {
-        case .signedIn: ImageEditorView()
-        case .signedOut: LoginView()
+            case .signedIn: ImageEditorView()
+            case .signedOut: LoginView()
         }
     }
 }

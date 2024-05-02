@@ -40,7 +40,7 @@ struct ImageEditorView: View {
 
                     } else if viewModel.imageData.count == 0 {
                         
-                        //Кнопка добавления изображение
+                        //Добавление изображения
                         Button {
                             showSheet.toggle()
                         } label: {
@@ -61,7 +61,7 @@ struct ImageEditorView: View {
                     viewModel.loadFilter()
                 })
                 
-                //Кнопка выхода из учетной записи
+                //Выход из учетной записи
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {

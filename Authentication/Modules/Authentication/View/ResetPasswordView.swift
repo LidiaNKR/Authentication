@@ -25,12 +25,16 @@ struct ResetPasswordView: View {
     var body: some View {
         ZStack {
             VStack {
+                
+                //Заголовок
                 Text(L10n.resetPassword)
                     .mainTitleStyle()
                 
+                //Поле ввода эл. почты
                 EmailTextField(title: L10n.enterEmailTitle,
                                 text: $email)
                 
+                //Сбросить пароль
                 MainButton(title: L10n.resetPasswordButtonTitle) {
                     
                     viewModel.showLoadingView.toggle()
@@ -41,6 +45,7 @@ struct ResetPasswordView: View {
                 }
                 .padding(.top)
                 
+                //Алерт
                 .alert(isPresented: $viewModel.showAlert) {
                     
                     Alert(title:
@@ -56,6 +61,7 @@ struct ResetPasswordView: View {
             }
             .padding(.horizontal)
             
+            //Лоадер
             if viewModel.showLoadingView {
                 LoadingView()
             }

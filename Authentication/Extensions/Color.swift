@@ -9,7 +9,7 @@ import SwiftUI
 
 extension Color {
     
-    /// Белый/Черный
+    /// Белый/Черный, в зависимости от темы
     static var primaryColor: Color {
         Color(
             UIColor {

@@ -23,6 +23,7 @@ struct TextEditorView: View {
     
     var body: some View {
         ZStack {
+            
             //Фон
             Color.black.opacity(Constants.opacity)
                 .ignoresSafeArea()
@@ -41,8 +42,8 @@ struct TextEditorView: View {
             .foregroundColor(viewModel.textBoxes[viewModel.currentIndex].textColor)
             .padding()
             
-            //Кнопки
             HStack {
+                //Готово
                 Button {
                     viewModel.doneTextEditing()
                 } label: {
@@ -51,6 +52,7 @@ struct TextEditorView: View {
                 
                 Spacer()
                 
+                //Отмена
                 Button {
                     viewModel.cancelTextEditing()
                 } label: {
@@ -60,6 +62,8 @@ struct TextEditorView: View {
             .padding()
             .foregroundColor(.green)
             .background(.black)
+            
+            //Изменение цвета текста
             .overlay(
                 HStack() {
                     

@@ -45,8 +45,7 @@ struct DravingView: View {
             }
         }
         
-        //Тулбар с действиями для редактирования изображения
-        
+        //Действия для редактирования изображения
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {

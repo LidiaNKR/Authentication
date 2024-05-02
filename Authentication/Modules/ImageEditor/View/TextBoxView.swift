@@ -19,6 +19,8 @@ struct TextBoxView: View {
     var body: some View {
         ZStack {
             ForEach(viewModel.textBoxes) { box in
+                
+                //Текст
                 Text(viewModel.getText(box: box))
                     .font(.system(size: 30))
                     .fontWeight(box.isBold ? .bold : .none)

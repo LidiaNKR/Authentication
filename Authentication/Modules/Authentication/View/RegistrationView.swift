@@ -29,12 +29,15 @@ struct RegistrationView: View {
                 
                 Spacer()
                 
+                //Заголовок
                 Text(L10n.registrationTitle)
                     .mainTitleStyle()
                 
+                //Поле ввода эл. почты
                 EmailTextField(title: L10n.enterEmailTitle,
                                text: $username)
                 
+                //Поле ввода пароля
                 PasswordSecureField(title: L10n.enterPasswordTitle,
                                     text: $password,
                                     isValidPassword: Binding(
@@ -43,6 +46,7 @@ struct RegistrationView: View {
                                     ),
                                     ifNeedCheckValidation: true)
                 
+                //Поле подтверждения пароля
                 PasswordSecureField(title: L10n.repeatPasswordTitle,
                                     text: $passwordAgain,
                                     isValidPassword: Binding(
@@ -51,6 +55,7 @@ struct RegistrationView: View {
                                     ),
                                     ifNeedCheckValidation: true)
                 
+                //Регистрация
                 MainButton(title: L10n.registrationButtonTitle) {
                     viewModel.showLoadingView.toggle()
 
@@ -60,6 +65,7 @@ struct RegistrationView: View {
                 }
                 .padding(.top)
                 
+                //Алерт
                 .alert(isPresented: $viewModel.showAlert) {
                     Alert(title: Text(viewModel.isDismissView ? L10n.alertSuccessRegistrationTitle : L10n.alertTitle),
                           message: Text(viewModel.message),
@@ -72,6 +78,7 @@ struct RegistrationView: View {
                 
                 Spacer()
                 
+                //Возврат на экран входа
                 Button {
                     presentationMode.animation().wrappedValue.dismiss()
                 } label: {
@@ -81,6 +88,7 @@ struct RegistrationView: View {
             }
             .padding(.horizontal)
             
+            //Лоадер
             if viewModel.showLoadingView {
                 LoadingView()
             }
