@@ -12,7 +12,7 @@ struct DravingView: View {
     
     // MARK: - Properties
     
-    @EnvironmentObject var viewModel: ImageEditorViewModel
+    @EnvironmentObject private var viewModel: ImageEditorViewModel
     
     // MARK: - Body
     

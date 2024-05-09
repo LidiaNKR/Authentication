@@ -31,10 +31,13 @@ struct ImagePicker: UIViewControllerRepresentable {
         return picker
     }
     
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+    func updateUIViewController(_ uiViewController: UIImagePickerController, 
+                                context: Context) {}
 }
 
-final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+final class Coordinator: NSObject,
+                         UIImagePickerControllerDelegate,
+                         UINavigationControllerDelegate {
     
     // MARK: - Properties
     
@@ -48,14 +51,16 @@ final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigation
     
     // MARK: - Methods
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let imageData = (info[.originalImage] as? UIImage)?.pngData() {
-            
-            imagePicker.imageData = imageData
-            imagePicker.originImageData = imageData
-            imagePicker.isShowPicker.toggle()
+    func imagePickerController(
+        _ picker: UIImagePickerController, didFinishPickingMediaWithInfo
+        info: [UIImagePickerController.InfoKey : Any]) {
+            if let imageData = (info[.originalImage] as? UIImage)?.pngData() {
+                
+                imagePicker.imageData = imageData
+                imagePicker.originImageData = imageData
+                imagePicker.isShowPicker.toggle()
+            }
         }
-    }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         imagePicker.isShowPicker.toggle()

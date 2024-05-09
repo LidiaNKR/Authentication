@@ -35,7 +35,7 @@ final class ImageEditorViewModel: ObservableObject {
     
     //Алерт
     @Published var showAlert: Bool = false
-    @Published var message: String = ""
+    @Published var message: LocalizedStringKey = ""
     
     //Отправка изображения
     @Published var isSharePresented: Bool = false
@@ -64,12 +64,15 @@ final class ImageEditorViewModel: ObservableObject {
     /// Конвертация изображения и текста в PNG формат
     func makeImage() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 1)
-        canvas.drawHierarchy(in: CGRect(origin: .zero, size: rect.size), afterScreenUpdates: true)
+        canvas.drawHierarchy(in: CGRect(origin: .zero, size: rect.size), 
+                             afterScreenUpdates: true)
         
         let swiftUIView = ZStack{
             ForEach(textBoxes) { [ self ] box in
                 
-                Text(textBoxes[currentIndex].id == box.id && addNewBox ? "" : box.text)
+                Text(textBoxes[currentIndex].id == box.id && addNewBox 
+                     ? ""
+                     : box.text)
                     .font(.system(size: 30))
                     .fontWeight(box.isBold ? .bold : .none)
                     .foregroundColor(box.textColor)
@@ -84,7 +87,8 @@ final class ImageEditorViewModel: ObservableObject {
             controller.backgroundColor = .clear
             canvas.backgroundColor = .clear
             
-            controller.drawHierarchy(in: CGRect(origin: .zero, size: rect.size), afterScreenUpdates: true)
+            controller.drawHierarchy(in: CGRect(origin: .zero, size: rect.size), 
+                                     afterScreenUpdates: true)
         }
         
         let generatedImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -104,7 +108,7 @@ final class ImageEditorViewModel: ObservableObject {
     func saveImage() {
         guard let image = makeImage() else { return }
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-        message = L10n.alertSuccessSaveImage
+        message = "Image saved successfully"
         showAlert.toggle()
     }
     

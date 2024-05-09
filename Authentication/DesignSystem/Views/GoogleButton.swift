@@ -19,7 +19,7 @@ struct GoogleButton: View {
     
     // MARK: - Properties
     
-    let title: String
+    let title: LocalizedStringKey
     var action: () -> Void
     
     // MARK: - Body
@@ -31,7 +31,7 @@ struct GoogleButton: View {
             HStack {
                 Spacer()
                 
-                Image(asset: Assets.google)
+                Image("google")
                     .resizable()
                     .frame(width: Constants.imageSize,
                            height: Constants.imageSize)
@@ -53,6 +53,6 @@ struct GoogleButton: View {
 
 struct GoogleButton_Previews: PreviewProvider {
     static var previews: some View {
-        GoogleButton(title: L10n.googleButtonTitle, action: {})
+        GoogleButton(title: "Sign in with Google", action: {})
     }
 }

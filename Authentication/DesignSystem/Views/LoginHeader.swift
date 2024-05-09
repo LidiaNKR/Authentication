@@ -11,8 +11,8 @@ struct LoginHeader: View {
     
     // MARK: - Properties
     
-    let title: String
-    let text: String
+    let title: LocalizedStringKey
+    let text: LocalizedStringKey
     
     // MARK: - Body
     
@@ -29,7 +29,7 @@ struct LoginHeader: View {
 
 struct LoginHeader_Previews: PreviewProvider {
     static var previews: some View {
-        LoginHeader(title: L10n.loginTitle,
-                    text: L10n.loginText)
+        LoginHeader(title: "Login to your personal account",
+                    text: "Please login to continue")
     }
 }

@@ -6,19 +6,16 @@
 //
 
 import SwiftUI
-import PhotosUI
-import PencilKit
-import CoreImage
 
 struct ImageEditorView: View {
     
     // MARK: - Properties
     
-    @EnvironmentObject var authService: AuthenticationViewModel
+    @EnvironmentObject private var authService: AuthenticationViewModel
     @ObservedObject private var viewModel = ImageEditorViewModel()
     
-    @State var showImagePicker: Bool = false
-    @State var sourceType: UIImagePickerController.SourceType = .camera
+    @State private var showImagePicker: Bool = false
+    @State private var sourceType: UIImagePickerController.SourceType = .camera
     @State private var showSheet = false
     
     // MARK: - Body
@@ -45,7 +42,7 @@ struct ImageEditorView: View {
                             showSheet.toggle()
                         } label: {
                             Image(systemName: "photo.artframe")
-                            Text(L10n.chooseYourPicture)
+                            Text("Select an image")
                         }
                         .padding()
                         .background(.green)
@@ -67,7 +64,7 @@ struct ImageEditorView: View {
                         Button {
                             authService.signOut { error in
                                 if let error {
-                                    viewModel.message = error.localizedDescription
+                                    viewModel.message = LocalizedStringKey(error.localizedDescription)
                                     viewModel.showAlert.toggle()
                                 }
                                 viewModel.cancelImageEditing()
@@ -95,13 +92,13 @@ struct ImageEditorView: View {
         
         //ActionSheet для выбора добавления фото из галереи/камеры
         .actionSheet(isPresented: $showSheet) {
-            ActionSheet(title: Text(L10n.selectPhoto),
-                        message: Text(""), buttons: [
-                            .default(Text(L10n.photoLibrary)) {
+            ActionSheet(title: Text("Select an image"),
+                        buttons: [
+                            .default(Text("Gallery")) {
                     showImagePicker.toggle()
                     sourceType = .photoLibrary
                 },
-                            .default(Text(L10n.camera)) {
+                            .default(Text("Сamera")) {
                     showImagePicker.toggle()
                     sourceType = .camera
                 },
@@ -119,9 +116,9 @@ struct ImageEditorView: View {
         
         //Алерт
         .alert(isPresented: $viewModel.showAlert) {
-            Alert(title: Text(L10n.alertSuccessTitle),
+            Alert(title: Text("Done"),
                   message: Text(viewModel.message),
-                  dismissButton: .default(Text(L10n.alertButtonTitle)))
+                  dismissButton: .default(Text("Ok")))
         }
     }
 }

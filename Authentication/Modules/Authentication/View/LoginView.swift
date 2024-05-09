@@ -19,10 +19,10 @@ struct LoginView: View {
     
     @EnvironmentObject var viewModel: AuthenticationViewModel
     
-    @State var email: String = ""
-    @State var password: String = ""
-    @State var showRegistrationView: Bool = false
-    @State var showResetPasswordView: Bool = false
+    @State private var email: String = ""
+    @State private var password: String = ""
+    @State private var showRegistrationView: Bool = false
+    @State private var showResetPasswordView: Bool = false
     
     // MARK: - Body
     
@@ -33,28 +33,28 @@ struct LoginView: View {
                     VStack(alignment: .center) {
                         
                         //Заголовок
-                        LoginHeader(title: L10n.loginTitle,
-                                    text: L10n.loginText)
+                        LoginHeader(title: "Login to your personal account",
+                                    text: "Please login to continue")
                             .padding(.bottom)
                         
                         //Поле ввода эл. почты
-                        EmailTextField(title: L10n.enterEmailTitle,
+                        EmailTextField(title: "Enter your E-mail",
                                        text: $email)
                         
                         //Поле ввода пароля
-                        PasswordSecureField(title: L10n.enterPasswordTitle,
+                        PasswordSecureField(title: "Enter your password",
                                             text: $password,
                                             isValidPassword: .constant(false))
                         
                         HStack {
                             //Зарегистрироваться
-                            Button(L10n.signUp) {
+                            Button("Register") {
                                 showRegistrationView.toggle()
                             }
                             Spacer()
                             
                             //Сбросить пароль
-                            Button(L10n.forgotPassword) {
+                            Button("Forgot your password?") {
                                 showResetPasswordView.toggle()
                             }
                         }
@@ -62,7 +62,7 @@ struct LoginView: View {
                                  Constants.buttonsHorisontalPadding)
                         
                         //Войти
-                        MainButton(title: L10n.loginButtonTitle) {
+                        MainButton(title: "Login") {
                             
                             viewModel.showLoadingView.toggle()
                             
@@ -76,23 +76,23 @@ struct LoginView: View {
                             VStack {
                                 Divider()
                             }
-                            Text(L10n.or)
+                            Text("or")
                             VStack {
                                 Divider()
                             }
                         }
                         
                         //Вход через Google
-                        GoogleButton(title: L10n.googleButtonTitle) {
+                        GoogleButton(title: "Sign in with Google") {
                             viewModel.signInWithGoogle()
                         }
                     }
                     //Алерт
                     .alert(isPresented: $viewModel.showAlert) {
-                        Alert(title: Text(L10n.alertTitle),
+                        Alert(title: Text("Error"),
                               message: Text(viewModel.message),
                               dismissButton:
-                                .default(Text(L10n.alertButtonTitle)) {
+                                .default(Text("Ok")) {
                             viewModel.showLoadingView.toggle()
                         })
                     }
