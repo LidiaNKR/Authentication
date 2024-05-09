@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Разрешить приложению &quot;PhotoEdit&quot; доступ к изображениям?</string>
+	<string></string>
 	<key>NSCameraUsageDescription</key>
-	<string>Разрешить приложению &quot;PhotoEdit&quot; доступ к камере?</string>
+	<string></string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

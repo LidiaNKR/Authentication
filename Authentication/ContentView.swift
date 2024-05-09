@@ -11,7 +11,7 @@ struct ContentView: View {
     
     // MARK: - Properties
     
-    @EnvironmentObject var viewModel: AuthenticationViewModel
+    @EnvironmentObject private var viewModel: AuthenticationViewModel
     
     // MARK: - Body
     

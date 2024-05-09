@@ -17,7 +17,7 @@ struct TextEditorView: View {
         static let scaleEffect: CGFloat = 2
     }
     
-    @EnvironmentObject var viewModel: ImageEditorViewModel
+    @EnvironmentObject private var viewModel: ImageEditorViewModel
     
     // MARK: - Body
     
@@ -30,33 +30,36 @@ struct TextEditorView: View {
             
             //Текстовое поле
             TextField(
-                L10n.typeHere,
+                "Type here",
                 text: $viewModel.textBoxes[viewModel.currentIndex].text
             )
             .font(
                 .system(
                     size: Constants.fontSize,
-                    weight: viewModel.textBoxes[viewModel.currentIndex].isBold ? .bold : .regular)
+                    weight: viewModel.textBoxes[viewModel.currentIndex].isBold
+                    ? .bold
+                    : .regular
+                )
             )
             .colorScheme(.dark)
             .foregroundColor(viewModel.textBoxes[viewModel.currentIndex].textColor)
             .padding()
             
             HStack {
-                //Готово
-                Button {
-                    viewModel.doneTextEditing()
-                } label: {
-                    Image(systemName: "checkmark")
-                }
-                
-                Spacer()
-                
                 //Отмена
                 Button {
                     viewModel.cancelTextEditing()
                 } label: {
                     Image(systemName: "xmark")
+                }
+                
+                Spacer()
+                
+                //Готово
+                Button {
+                    viewModel.doneTextEditing()
+                } label: {
+                    Image(systemName: "checkmark")
                 }
             }
             .padding()
@@ -74,7 +77,9 @@ struct TextEditorView: View {
                     Button{
                         viewModel.textBoxes[viewModel.currentIndex].isBold.toggle()
                     } label: {
-                        Text(viewModel.textBoxes[viewModel.currentIndex].isBold ? "Normal" : "Bold" )
+                        Text(viewModel.textBoxes[viewModel.currentIndex].isBold 
+                             ? "Normal"
+                             : "Bold" )
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                     }

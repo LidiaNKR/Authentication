@@ -5,6 +5,7 @@
 //  Created by Лидия Некрасова on 29.04.2024.
 //
 
+import SwiftUI
 import Firebase
 import GoogleSignIn
 
@@ -22,7 +23,7 @@ final class AuthenticationViewModel: ObservableObject {
     
     @Published var state: SignInState = .signedOut
     @Published var showLoadingView: Bool = false
-    @Published var message: String = ""
+    @Published var message: LocalizedStringKey = ""
     @Published var showAlert: Bool = false
     @Published var isDismissView: Bool = false
     
@@ -33,12 +34,14 @@ final class AuthenticationViewModel: ObservableObject {
     // MARK: - Initializers
     
     init() {
-        state = (authUser != nil && authUser?.isEmailVerified  ?? false) ? .signedIn : .signedOut
+        state = (authUser != nil && authUser?.isEmailVerified  ?? false) 
+        ? .signedIn 
+        : .signedOut
     }
     
     // MARK: - UI
     
-    func showAlert(messageTitle: String, isDismiss: Bool = false) {
+    func showAlert(messageTitle: LocalizedStringKey, isDismiss: Bool = false) {
         message = messageTitle
         showAlert.toggle()
         isDismissView = isDismiss
@@ -49,18 +52,19 @@ final class AuthenticationViewModel: ObservableObject {
     func signIn(withEmail email: String, password: String)  async throws {
         
         do {
-            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            let result = try await Auth.auth().signIn(withEmail: email, 
+                                                      password: password)
             
             if !result.user.isEmailVerified {
                 ///Выводим ошибку о том, что email не подтвержден
-                showAlert(messageTitle: L10n.alertEmailNotConfirmed)
+                showAlert(messageTitle: "E-mail not verified")
             } else {
                 ///Осуществляем вход в учетную запись
                 showLoadingView.toggle()
                 state = .signedIn
             }
         } catch {
-            showAlert(messageTitle: error.localizedDescription)
+            showAlert(messageTitle: LocalizedStringKey(error.localizedDescription))
         }
     }
     
@@ -74,18 +78,20 @@ final class AuthenticationViewModel: ObservableObject {
                 password: String) async throws {
         
         do {
-            try await Auth.auth().createUser(withEmail: email, password: password)
+            try await Auth.auth().createUser(withEmail: email, 
+                                             password: password)
             
             ///Отправляем подтверждение на эл. почту
             sendVerificatiOnMail()
             
             ///Выводим алерт об успешной регистрации
             showAlert(
-                messageTitle: L10n.alertSendEmailConfirmed,
-                isDismiss: true)
+                messageTitle: "A confirmation message has been sent to your email",
+                isDismiss: true
+            )
             
         } catch {
-            showAlert(messageTitle: error.localizedDescription)
+            showAlert(messageTitle: LocalizedStringKey(error.localizedDescription))
         }
     }
     
@@ -98,11 +104,12 @@ final class AuthenticationViewModel: ObservableObject {
             
             ///Выводим алерт об успешноом сбросе пароля
             showAlert(
-                messageTitle: L10n.alertSendPasswordReset,
-                isDismiss: true)
-
+                messageTitle: "A message has been sent to your email to set a new password",
+                isDismiss: true
+            )
+            
         } catch {
-            showAlert(messageTitle: error.localizedDescription)
+            showAlert(messageTitle: LocalizedStringKey(error.localizedDescription))
         }
     }
     
@@ -117,11 +124,13 @@ final class AuthenticationViewModel: ObservableObject {
         
         guard let rootViewController = UIWindow.getRootViewController else { return }
         
-        GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController) { [weak self] signInResult, error in
+        GIDSignIn.sharedInstance.signIn(
+            withPresenting: rootViewController
+        ) { [weak self] signInResult, error in
             guard let self, let signInResult else { return }
             
             if let error = error {
-                showAlert(messageTitle: error.localizedDescription)
+                showAlert(messageTitle: LocalizedStringKey(error.localizedDescription))
                 return
             }
             
@@ -159,7 +168,7 @@ final class AuthenticationViewModel: ObservableObject {
             guard let self else { return }
 
             if let error = error {
-                showAlert(messageTitle: error.localizedDescription)
+                showAlert(messageTitle: LocalizedStringKey(error.localizedDescription))
             } else {
                 ///Меняем статус авторизации
                 state = .signedIn
@@ -176,7 +185,7 @@ final class AuthenticationViewModel: ObservableObject {
             guard let self else { return }
             
             if let error {
-                showAlert(messageTitle: error.localizedDescription)
+                showAlert(messageTitle: LocalizedStringKey(error.localizedDescription))
             }
         }
     }

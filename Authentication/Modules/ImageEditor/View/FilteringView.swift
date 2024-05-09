@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FilteringView: View {
     
-    @EnvironmentObject var viewModel: ImageEditorViewModel
+    @EnvironmentObject private var viewModel: ImageEditorViewModel
     
     // MARK: - Body
     

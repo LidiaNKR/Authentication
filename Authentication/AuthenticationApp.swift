@@ -13,7 +13,7 @@ struct AuthenticationApp: App {
     
     // MARK: - Properties
     
-    @StateObject var viewModel = AuthenticationViewModel()
+    @StateObject private var viewModel = AuthenticationViewModel()
     
     // MARK: - Initializers
     

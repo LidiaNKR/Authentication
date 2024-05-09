@@ -16,12 +16,12 @@ struct PasswordSecureField: View {
     @State private var borderColor: Color = .primaryColor
     @State private var isSecured: Bool = true
     
-    private let title: String
+    private let title: LocalizedStringKey
     private var ifNeedCheckValidation: Bool = false
     
     // MARK: - Initializers
     
-    init(title: String,
+    init(title: LocalizedStringKey,
          text: Binding<String>,
          isValidPassword: Binding<Bool>,
          ifNeedCheckValidation: Bool = false) {
@@ -69,7 +69,7 @@ struct PasswordSecureField: View {
 
 struct PasswordSecureField_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordSecureField(title: L10n.enterPasswordTitle,
+        PasswordSecureField(title: "Enter your password",
                           text: .constant(""),
                           isValidPassword: .constant(true))
     }

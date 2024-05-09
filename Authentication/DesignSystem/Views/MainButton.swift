@@ -17,7 +17,7 @@ struct MainButton: View {
     
     // MARK: - Properties
     
-    var title: String
+    var title: LocalizedStringKey
     var action: () -> Void
     
     // MARK: - Body
@@ -42,6 +42,6 @@ struct MainButton: View {
 
 struct MainButton_Previews: PreviewProvider {
     static var previews: some View {
-        MainButton(title: L10n.loginButtonTitle, action: {})
+        MainButton(title: "Login", action: {})
     }
 }

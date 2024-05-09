@@ -13,11 +13,11 @@ struct EmailTextField: View {
     
     @State private var borderColor: Color = .primaryColor
     @Binding private var text: String
-    private let title: String
+    private let title: LocalizedStringKey
     
     // MARK: - Initializers
     
-    init(title: String, text: Binding<String>) {
+    init(title: LocalizedStringKey, text: Binding<String>) {
         self.title = title
         self._text = text
     }
@@ -55,7 +55,7 @@ struct EmailTextField: View {
 
 struct EmailTextfield_Previews: PreviewProvider {
     static var previews: some View {
-        EmailTextField(title: L10n.enterEmailTitle,
+        EmailTextField(title: "Enter your E-mail",
                        text: .constant(""))
     }
 }

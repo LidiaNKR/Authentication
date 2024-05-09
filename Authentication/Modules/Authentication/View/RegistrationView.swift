@@ -11,15 +11,15 @@ struct RegistrationView: View {
     
     // MARK: - Navigation
     
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
     
     // MARK: - Properties
     
-    @EnvironmentObject var viewModel: AuthenticationViewModel
+    @EnvironmentObject private var viewModel: AuthenticationViewModel
     
-    @State var username: String = ""
-    @State var password: String = ""
-    @State var passwordAgain: String = ""
+    @State private var username: String = ""
+    @State private var password: String = ""
+    @State private var passwordAgain: String = ""
     
     // MARK: - Body
     
@@ -30,15 +30,15 @@ struct RegistrationView: View {
                 Spacer()
                 
                 //Заголовок
-                Text(L10n.registrationTitle)
+                Text("Registration")
                     .mainTitleStyle()
                 
                 //Поле ввода эл. почты
-                EmailTextField(title: L10n.enterEmailTitle,
+                EmailTextField(title: "Enter your E-mail",
                                text: $username)
                 
                 //Поле ввода пароля
-                PasswordSecureField(title: L10n.enterPasswordTitle,
+                PasswordSecureField(title: "Enter your password",
                                     text: $password,
                                     isValidPassword: Binding(
                                         get: { self.password.isValidPassword },
@@ -47,7 +47,7 @@ struct RegistrationView: View {
                                     ifNeedCheckValidation: true)
                 
                 //Поле подтверждения пароля
-                PasswordSecureField(title: L10n.repeatPasswordTitle,
+                PasswordSecureField(title: "Confirm password",
                                     text: $passwordAgain,
                                     isValidPassword: Binding(
                                         get: { self.password == self.passwordAgain },
@@ -56,21 +56,25 @@ struct RegistrationView: View {
                                     ifNeedCheckValidation: true)
                 
                 //Регистрация
-                MainButton(title: L10n.registrationButtonTitle) {
+                MainButton(title: "Register") {
                     viewModel.showLoadingView.toggle()
 
                     Task {
-                        try await viewModel.signUp(withEmail: username, password: password)
+                        try await viewModel.signUp(withEmail: username, 
+                                                   password: password)
                     }
                 }
                 .padding(.top)
                 
                 //Алерт
                 .alert(isPresented: $viewModel.showAlert) {
-                    Alert(title: Text(viewModel.isDismissView ? L10n.alertSuccessRegistrationTitle : L10n.alertTitle),
+                    Alert(title: Text(viewModel.isDismissView 
+                                      ? "Registration completed successfully"
+                                      : "Error"),
                           message: Text(viewModel.message),
-                          dismissButton: .default(Text(L10n.alertButtonTitle)) {
-                        if viewModel.isDismissView { presentationMode.animation().wrappedValue.dismiss()
+                          dismissButton: .default(Text("Ok")) {
+                        if viewModel.isDismissView { 
+                            presentationMode.animation().wrappedValue.dismiss()
                         }
                         viewModel.showLoadingView.toggle()
                     })
@@ -82,7 +86,7 @@ struct RegistrationView: View {
                 Button {
                     presentationMode.animation().wrappedValue.dismiss()
                 } label: {
-                    Text(L10n.hasRegistrationButtonTitle)
+                    Text("I already have an account")
                         .foregroundColor(.red)
                 }
             }

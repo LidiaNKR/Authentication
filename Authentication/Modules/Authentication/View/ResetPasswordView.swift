@@ -11,14 +11,13 @@ struct ResetPasswordView: View {
     
     // MARK: - Navigation
     
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
     
     // MARK: - Properties
     
-    @EnvironmentObject var viewModel: AuthenticationViewModel
+    @EnvironmentObject private var viewModel: AuthenticationViewModel
     
-    @State var email: String = ""
-    @State var message: String = ""
+    @State private var email: String = ""
     
     // MARK: - Body
     
@@ -27,15 +26,15 @@ struct ResetPasswordView: View {
             VStack {
                 
                 //Заголовок
-                Text(L10n.resetPassword)
+                Text("Password recovery")
                     .mainTitleStyle()
                 
                 //Поле ввода эл. почты
-                EmailTextField(title: L10n.enterEmailTitle,
+                EmailTextField(title: "Enter your E-mail",
                                 text: $email)
                 
                 //Сбросить пароль
-                MainButton(title: L10n.resetPasswordButtonTitle) {
+                MainButton(title: "Reset password") {
                     
                     viewModel.showLoadingView.toggle()
                     
@@ -49,9 +48,10 @@ struct ResetPasswordView: View {
                 .alert(isPresented: $viewModel.showAlert) {
                     
                     Alert(title:
-                            Text(viewModel.isDismissView ? L10n.alertSuccessResetPasswordTitle : L10n.alertTitle),
-                          message: Text(message),
-                          dismissButton: .default(Text(L10n.alertButtonTitle)) {
+                            Text(viewModel.isDismissView 
+                                 ? "Password reset successful"
+                                 : "Error"),
+                          dismissButton: .default(Text("Ok")) {
                         if viewModel.isDismissView {
                             presentationMode.animation().wrappedValue.dismiss()
                         }
