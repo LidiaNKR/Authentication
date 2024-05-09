@@ -36,6 +36,6 @@
 - Язык программирования - `Swift`
 - Интерфейс - `SwiftUI`
 - Архитектура - `MVVM`
-- Frameworks: `Firebase Auth`, `Google SignIn`, `CoreImage`, `PencilKit`, `Photos`, `SwiftGen`
+- Frameworks: `Firebase Auth`, `Google SignIn`, `CoreImage`, `PencilKit`, `Photos`, `SwiftGen`/`String Catalogs`
 - iOS 16.0+
 
